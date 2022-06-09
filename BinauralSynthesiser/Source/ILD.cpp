@@ -23,7 +23,7 @@ ILDClass::ILDClass(float samplerate) : sampleRate(samplerate)
 float ILDClass::process(float sample, int channel)
 {
     float output = 0.0f;
-    for (int i = 0; i < 4; i++)
+    for (int i = 1; i < 4; i++)
     {
         if(i == 2 || i == 0)
             output += (-bandPassFilter[i].filterProcess(sample, channel) * amplitudes[amplitudeIndex][i][channel]);
