@@ -54,46 +54,18 @@ void BinauralSynthClass::handleMidiEvent(const juce::MidiMessage& midiEvent)
 {
     if (midiEvent.isNoteOn())
     {
-        //const auto oscillatorId = midiEvent.getNoteNumber();
-        //const auto frequency = midiToHz(oscillatorId);
-        //for (int i = 0; i < NUM_VOICES; i++)
-        //{
-            //if (voices.isPlaying() == false)
-            //{
         voices.newNote(static_cast<int>(midiEvent.getNoteNumber()));
-        //activeNoteID[i] = static_cast<int>(midiEvent.getNoteNumber());
-        //break;
-    //}
-//}
     }
     else if (midiEvent.isNoteOff())
     {
-        //const auto oscillatorId = midiEvent.getNoteNumber();
-        //oscillators[oscillatorId].stop();
-        //for (int i = 0; i < NUM_VOICES; i++)
-        //{
-            //if (activeNoteID[i] == static_cast<int>(midiEvent.getNoteNumber()))
-            //{
         voices.noteRelease();
-        //    break;
-        //}
-   // }
     }
-    /*else if (midiEvent.isAllNotesOff())
-    {
-        for (auto& oscillator : oscillators)
-        {
-            oscillator.stop();
-        }
 
-    }
-    */
 }
 
 void BinauralSynthClass::render(juce::AudioBuffer<float>& buffer, int startSample, int endSample)
 {
     auto* channelBuffer = buffer.getWritePointer(0);
-    //for (VoiceClass voice : voices)
 
     if (voices.isPlaying())
     {
@@ -111,8 +83,5 @@ void BinauralSynthClass::render(juce::AudioBuffer<float>& buffer, int startSampl
             channelBuffer[sample] += voices.voiceProcess(1);
         }
     }
-    //for (auto channel = 1; channel < buffer.getNumChannels(); channel++)
-    //{
-    //    std::copy(firstChannel + startSample, firstChannel + endSample, buffer.getWritePointer(channel) + startSample);
-    //
+
 }

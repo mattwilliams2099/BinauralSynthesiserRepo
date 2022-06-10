@@ -43,7 +43,10 @@ float VoiceClass::voiceProcess(int channel)
 
 void VoiceClass::applyFilterEnvelope(float envOutput)
 {
-    LPF.setLowPassCo((cutoff + (envOutput * filterEGAmt)), resonance);
+    if ((cutoff + (envOutput * filterEGAmt)) < 20000.0f)
+        LPF.setLowPassCo((cutoff + (envOutput * filterEGAmt)), resonance);
+    else 
+        LPF.setLowPassCo(20000.0f, resonance);
 }
 
 void VoiceClass::newNote(int midiNote)
